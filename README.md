@@ -16,9 +16,8 @@ Avant de commencer, assurez-vous d'avoir installé les logiciels suivants :
       cd chemin/vers/votre/projet/api/blog_api
     ```
 3. Installer les dépendances:
-   ````bash
-   composer install
-   ```
+      ````bash
+         composer install
 4. Configurer l'environnement et la base de données:
    - Copiez le fichier `.env.example` en `.env` :
      ```bash
