@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import BlogArticles from '@/components/BlogArticles.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <BlogArticles />
   </main>
 </template>
