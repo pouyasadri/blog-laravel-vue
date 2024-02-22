@@ -19,8 +19,7 @@ class ArticleController extends Controller
     public function index(): JsonResponse
     {
         // Eager loading for better performance
-        $articles = Article::paginate(3);
-
+        $articles = Article::orderBy('created_at', 'desc')->paginate(3);
         return response()->json($articles);
     }
 

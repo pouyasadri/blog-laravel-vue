@@ -23,6 +23,14 @@ class ArticleRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->isMethod('put')) {
+            return [
+                'title' => 'required|string|max:255',
+                'content' => 'required',
+                'category' => 'required|in:news,updates,reports,stories',
+                'status' => 'required|in:draft,published,archive',
+            ];
+        }
         return [
             'title' => 'required|string|max:255',
             'content' => 'required',

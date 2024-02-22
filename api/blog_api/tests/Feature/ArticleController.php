@@ -68,6 +68,7 @@ class ArticleController extends TestCase
             'title' => 'New Article Title',
             'content' => 'Content of the new article',
             'category' => 'news',
+            'status' => 'published',
             'image' => $file, // Attach the fake file
         ];
 
@@ -78,7 +79,8 @@ class ArticleController extends TestCase
         $this->assertDatabaseHas('articles', [
             'title' => 'New Article Title',
             'content' => 'Content of the new article',
-            'category' => 'news', // Ensure the category is 'news
+            'category' => 'news',
+            'status' => 'published',
             'image' => $response->json('image'),
         ]);
 
@@ -87,6 +89,8 @@ class ArticleController extends TestCase
             ->assertJsonStructure([
                 'title',
                 'content',
+                'category',
+                'status',
                 'image',
             ]);
 
@@ -102,6 +106,7 @@ class ArticleController extends TestCase
             'title' => 'Original Title',
             'content' => 'Original content',
             'category' => 'news',
+            'status' => 'published',
             'image' => 'original_image.jpg',
         ]);
         $newImage = UploadedFile::fake()->image('updated_image.jpg');
@@ -110,7 +115,8 @@ class ArticleController extends TestCase
         $updateData = [
             'title' => 'Updated Title',
             'content' => 'Updated content',
-            'category' => 'stories', // Add a category to the data
+            'category' => 'stories',
+            'status' => 'draft',
             'image' => $newImage,
         ];
 
@@ -123,6 +129,7 @@ class ArticleController extends TestCase
             'title' => 'Updated Title',
             'content' => 'Updated content',
             'category' => 'stories',
+            'status' => 'draft',
         ]);
 
         // Assert: The response contains the updated article data and status is 200 OK
@@ -132,6 +139,7 @@ class ArticleController extends TestCase
                 'title' => 'Updated Title',
                 'content' => 'Updated content',
                 'category' => 'stories',
+                'status' => 'draft',
             ]);
     }
     /** @test */
