@@ -6,6 +6,7 @@ import type { Article } from '@/types/article'
 import { fetchArticles } from '@/services/fetchArticlesService'
 import { deleteArticle } from '@/services/deleteArticleService'
 import type { Link } from '@/types/link'
+import { useToast } from 'vue-toastification'
 
 export default defineComponent({
   components: {
@@ -15,11 +16,16 @@ export default defineComponent({
   setup() {
     const articles = ref<Article[]>([])
     const links = ref<Link[]>([])
-
+    const toast = useToast()
     const changePage = async (url: string) => {
       const { articles: fetchedArticles, links: fetchedLinks } = await fetchArticles(url)
       articles.value = fetchedArticles
       links.value = fetchedLinks
+    }
+    const HandleDeleteArticle = (id: number) => {
+      deleteArticle(id).then(() => {
+        toast.success('Article deleted successfully')
+      })
     }
     // Fetch articles when the component is mounted
     onMounted(async () => {
@@ -32,7 +38,7 @@ export default defineComponent({
       articles,
       links,
       changePage,
-      deleteArticle
+      HandleDeleteArticle
     }
   }
 })
@@ -104,7 +110,7 @@ export default defineComponent({
         <td class="px-6 py-4">
           <div class="flex justify-end gap-4">
             <div class="p-2 bg-neutral-100 rounded hover:shadow hover:bg-neutral-200">
-              <TrashIcon @click="deleteArticle(article.id)" class="cursor-pointer" />
+              <TrashIcon @click="HandleDeleteArticle(article.id)" class="cursor-pointer" />
             </div>
             <div class="p-2 bg-neutral-100 rounded hover:shadow hover:bg-neutral-200">
               <EditIcon @click="$emit('edit-article', article) " class="cursor-pointer" />

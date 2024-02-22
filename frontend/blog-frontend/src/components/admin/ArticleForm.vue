@@ -76,6 +76,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, watch } from 'vue'
 import axios from 'axios'
+import { useToast } from 'vue-toastification'
 
 /**
  * BlogArticleForm component
@@ -96,7 +97,7 @@ export default defineComponent({
       status: 'draft',
       image: null as File | null
     })
-
+    const toast = useToast()
     /**
      * Handle file change event
      * @param {Event} e - The event object
@@ -120,38 +121,66 @@ export default defineComponent({
      * Submit the form
      */
     const submitForm = async () => {
-      const formData = new FormData()
-      formData.append('title', state.title)
-      formData.append('content', state.content)
-      formData.append('category', state.category)
-      formData.append('status', state.status)
-      if (state.image) {
-        formData.append('image', state.image)
-      }
+
       try {
         let response
         if (props.article) {
           // If an article is being edited, send a PUT request
-          //TODO: Fix the URL
-          response = await axios.put(`http://127.0.0.1:8000/api/articles/${props.article.id}`, formData)
+          response = await axios.put(`http://127.0.0.1:8000/api/articles/${props.article.id}`, {
+            title: state.title,
+            content: state.content,
+            category: state.category,
+            status: state.status
+          }).then((response) => {
+            if (response.status === 200) {
+              toast.success('Article updated successfully')
+            } else {
+              toast.error('Failed to update article')
+            }
+            return response
+          })
         } else {
           // Otherwise, send a POST request
-          response = await axios.post('http://127.0.0.1:8000/api/articles', formData)
+          const formData = new FormData()
+          formData.append('title', state.title)
+          formData.append('content', state.content)
+          formData.append('category', state.category)
+          formData.append('status', state.status)
+          if (state.image) {
+            formData.append('image', state.image)
+          }
+          response = await axios.post('http://127.0.0.1:8000/api/articles', formData).then((response) => {
+            if (response.status === 201) {
+              toast.success('Article created successfully')
+            } else {
+              toast.error('Failed to submit form')
+            }
+            return response
+          })
         }
 
         if (response.status === 200 || response.status === 201) {
           state.title = ''
           state.content = ''
           state.category = ''
+          state.status = 'draft'
           state.image = null
-        } else {
-          console.error('Failed to submit form')
+          const quillEditor = document.querySelector('#content .ql-editor')
+          if (quillEditor) {
+            quillEditor.innerHTML = ''
+          }
+          const fileInput = document.getElementById('image') as HTMLInputElement
+          if (fileInput) {
+            fileInput.value = ''
+          }
         }
       } catch (error: any) {
         if (error.response && error.response.data) {
-          console.error('Failed to submit form', error.response.data)
+          console.log('Failed to submit form', error.response.data)
+          toast.error('Failed to submit form', error.response.data)
         } else {
-          console.error('Failed to submit form', error)
+          console.log('Failed to submit form', error)
+          toast.error('Failed to submit form', error)
         }
       }
     }

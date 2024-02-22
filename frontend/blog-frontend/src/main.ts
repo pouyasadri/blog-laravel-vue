@@ -4,9 +4,12 @@ import router from './router'
 import './assets/main.css'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
 
 const app = createApp(App)
 
 app.use(router)
+app.use(Toast)
 app.component('QuillEditor', QuillEditor)
 app.mount('#app')
