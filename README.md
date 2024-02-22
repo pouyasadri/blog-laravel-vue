@@ -8,7 +8,10 @@ Avant de commencer, assurez-vous d'avoir installé les logiciels suivants :
 - Node.js et npm
 - Un serveur de base de données (MySQL, PostgreSQL, etc.)
 ### Installation
-1. Cloner le dépôt:``` bash git clone git@github.com:pouyasadri/blog-laravel-vue.git chemin/vers/votre/projet```
+1. Cloner le dépôt:
+   ```bash
+   git clone git@github.com:pouyasadri/blog-laravel-vue.git chemin/vers/votre/projet
+    ```
 2. `cd chemin/vers/votre/projet/api/blog_api`
 3. Installer les dépendances: `composer install`
 4. Configurer l'environnement et la base de données:
