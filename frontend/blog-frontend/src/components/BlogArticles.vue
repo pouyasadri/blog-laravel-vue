@@ -44,7 +44,7 @@ export default defineComponent({
     const links = ref<Link[]>([])
     const router = useRouter()
 
-    const articleImageUrl = (article: Article) => `http://localhost:8000/images/articles/${article.image}`
+    const articleImageUrl = (article: Article) => `http://localhost:8000/storage/images/articles/${article.image}`
 
     const readMore = (article: Article) => {
       router.push({ name: 'ArticleView', params: { id: article.id } })

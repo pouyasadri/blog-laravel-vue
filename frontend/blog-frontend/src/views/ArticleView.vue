@@ -43,7 +43,7 @@ export default defineComponent({
       const idValue = Array.isArray(id) ? id[0] : id
       article.value = await fetchArticle(idValue)
     })
-    const articleImageUrl = computed(() => `http://localhost:8000/images/articles/${article.value?.image}`)
+    const articleImageUrl = computed(() => `http://localhost:8000/storage/images/articles/${article.value?.image}`)
     const formattedTimestamp: ComputedRef<Timestamp> = computed(() => {
       if (article.value?.created_at && article.value?.updated_at) {
         const createdAt = new Date(article.value.created_at)
