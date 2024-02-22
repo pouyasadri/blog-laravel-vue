@@ -16,26 +16,26 @@ Avant de commencer, assurez-vous d'avoir installé les logiciels suivants :
      ```bash
      cp .env.example .env
      ```
-  -  Ouvrez le fichier .env et modifiez les valeurs relatives à la base de données (DB_DATABASE, DB_USERNAME, et DB_PASSWORD) pour correspondre à votre configuration locale. Par exemple, pour une base de données MySQL :
-      ```bash
-      DB_CONNECTION=mysql
-      DB_HOST=127.0.0.1
-      DB_PORT=3306
-      DB_DATABASE=blog
-      DB_USERNAME=votre_utilisateur
-      DB_PASSWORD=votre_mot_de_passe
-      ```
+   -  Ouvrez le fichier .env et modifiez les valeurs relatives à la base de données (DB_DATABASE, DB_USERNAME, et DB_PASSWORD) pour correspondre à votre configuration locale. Par exemple, pour une base de        données MySQL :
+         ```bash
+         DB_CONNECTION=mysql
+         DB_HOST=127.0.0.1
+         DB_PORT=3306
+         DB_DATABASE=blog
+         DB_USERNAME=votre_utilisateur
+         DB_PASSWORD=votre_mot_de_passe
+         ```
       Si vous utilisez un autre type de base de données (comme PostgreSQL), assurez-vous de modifier également DB_CONNECTION et DB_PORT en conséquence.
 5. Générer une clé d'application
-  ```bash
-    php artisan key:generate
-```
+     ```bash
+       php artisan key:generate
+     ```
 6. Exécuter les migrations et les seeders
 
-Cela va configurer votre base de données et la remplir avec des données initiales.
-```bash
-php artisan migrate --seed
-```
+   Cela va configurer votre base de données et la remplir avec des données initiales.
+      ```bash
+      php artisan migrate --seed
+      ```
 7. 3. Lancer le serveur de développement
    ```bash
    php artisan serve
