@@ -12,8 +12,13 @@ Avant de commencer, assurez-vous d'avoir installé les logiciels suivants :
    ```bash
    git clone git@github.com:pouyasadri/blog-laravel-vue.git chemin/vers/votre/projet
     ```
-2. `cd chemin/vers/votre/projet/api/blog_api`
-3. Installer les dépendances: `composer install`
+2. ```bash
+      cd chemin/vers/votre/projet/api/blog_api
+    ```
+3. Installer les dépendances:
+   ````bash
+   composer install
+   ```
 4. Configurer l'environnement et la base de données:
    - Copiez le fichier `.env.example` en `.env` :
      ```bash
