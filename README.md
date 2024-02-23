@@ -10,7 +10,7 @@ Avant de commencer, assurez-vous d'avoir installé les logiciels suivants :
 ### Installation
 1. Cloner le dépôt:
    ```bash
-   git clone git@github.com:pouyasadri/blog-laravel-vue.git chemin/vers/votre/projet
+   git clone git@github.com:pouyasadri/blog-laravel-vue.git
     ```
 2. ```bash
       cd chemin/vers/votre/projet/api/blog_api
@@ -48,7 +48,7 @@ Avant de commencer, assurez-vous d'avoir installé les logiciels suivants :
       ```bash
       php artisan migrate:fresh --seed --seeder=ArticleSeeder
       ```
-7. 3. Lancer le serveur de développement
+7. Lancer le serveur de développement
    ```bash
    php artisan serve
    ```
