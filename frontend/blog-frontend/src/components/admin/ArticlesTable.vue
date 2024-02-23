@@ -22,10 +22,21 @@ export default defineComponent({
       articles.value = fetchedArticles
       links.value = fetchedLinks
     }
-    const HandleDeleteArticle = (id: number) => {
-      deleteArticle(id).then(() => {
-        toast.success('Article deleted successfully')
-      })
+    const handleDeleteArticle = async (id: number) => {
+      const confirmDelete = window.confirm('Are you sure you want to delete this article?')
+      if (confirmDelete) {
+        try {
+          const success = await deleteArticle(id)
+          if (success) {
+            toast.success('Article deleted successfully')
+            // Refresh articles or handle UI updates here
+          }
+        } catch (error: any) {
+          toast.error(error.message)
+        }
+      } else {
+        toast.info('Article deletion cancelled')
+      }
     }
     // Fetch articles when the component is mounted
     onMounted(async () => {
@@ -38,7 +49,7 @@ export default defineComponent({
       articles,
       links,
       changePage,
-      HandleDeleteArticle
+      handleDeleteArticle
     }
   }
 })
@@ -110,7 +121,7 @@ export default defineComponent({
         <td class="px-6 py-4">
           <div class="flex justify-end gap-4">
             <div class="p-2 bg-neutral-100 rounded hover:shadow hover:bg-neutral-200">
-              <TrashIcon @click="HandleDeleteArticle(article.id)" class="cursor-pointer" />
+              <TrashIcon @click="handleDeleteArticle(article.id)" class="cursor-pointer" />
             </div>
             <div class="p-2 bg-neutral-100 rounded hover:shadow hover:bg-neutral-200">
               <EditIcon @click="$emit('edit-article', article) " class="cursor-pointer" />
