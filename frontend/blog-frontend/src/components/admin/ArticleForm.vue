@@ -26,14 +26,15 @@
         <label class="block text-gray-700 text-xl font-bold mb-2" for="category">
           Category
         </label>
-        <input
+        <select
           v-model="category"
           class="shadow appearance-none border  text-base rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="category"
-          type="text"
-
-          placeholder="Enter category"
-        />
+          id="category">
+          <option value="news">News</option>
+          <option value="updates">Updates</option>
+          <option value="reports">Reports</option>
+          <option value="reports">Reports</option>
+        </select>
 
       </div>
       <div class="mb-4">
@@ -93,7 +94,7 @@ export default defineComponent({
     const state = reactive({
       title: '',
       content: '',
-      category: '',
+      category: 'news',
       status: 'draft',
       image: null as File | null
     })
