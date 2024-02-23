@@ -41,7 +41,7 @@ Avant de commencer, assurez-vous d'avoir installé les logiciels suivants :
 
    Cela va configurer votre base de données et la remplir avec des données initiales.
       ```bash
-      php artisan migrate --seed
+      php artisan migrate:fresh --seed --seeder=ArticleSeeder
       ```
 7. 3. Lancer le serveur de développement
    ```bash
