@@ -14,7 +14,7 @@ export async function deleteArticle(id: number): Promise<Article[]> {
     try {
       const response: AxiosResponse = await axios.delete(`http://127.0.0.1:8000/api/articles/${id}`)
 
-      if (response.status === 204) {
+      if (response.status === 200) {
 
         return []
       } else {
