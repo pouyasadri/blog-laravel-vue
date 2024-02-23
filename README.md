@@ -37,6 +37,11 @@ Avant de commencer, assurez-vous d'avoir installé les logiciels suivants :
      ```bash
        php artisan key:generate
      ```
+6. Créer un lien symbolique pour le répertoire de stockage
+
+   Cette étape est cruciale pour permettre l'accès aux fichiers stockés dans storage/app/public depuis le répertoire public du serveur web.
+   ```bash
+      php artisan storage:link
 6. Exécuter les migrations et les seeders
 
    Cela va configurer votre base de données et la remplir avec des données initiales.
